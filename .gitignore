@@ -47,6 +47,7 @@ out/
 *.iml
 
 # Maven
+
 target/
 
 # mpeltonen/sbt-idea plugin
