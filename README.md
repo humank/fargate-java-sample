@@ -81,3 +81,5 @@ Check for the running result:
 [INFO] ------------------------------------------------------------------------
 
 ```
+9. Install AWS Fargate CLI to simplify the instruction - http://somanymachines.com/fargate/
+You can choose download the binary directly, or manual build it ony your laptop leverage the source : https://github.com/jpignata/fargate
