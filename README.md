@@ -83,3 +83,41 @@ Check for the running result:
 ```
 9. Install AWS Fargate CLI to simplify the instruction - http://somanymachines.com/fargate/
 You can choose download the binary directly, or manual build it ony your laptop leverage the source : https://github.com/jpignata/fargate
+
+10. Until 2018-09-14, the Fargate CLI doesn't support multiple region usage, you need to clone the source code to make build yourself, take a look from here:
+https://twitter.com/pahudnet/status/1040233349141295104
+
+```
+change directory to $GOPATH, wich contains 3 folders make you easy to check.
+
+# ex: /Users/aaa/go --> $GOPATH
+#/Users/aaa/go/bin
+#/Users/aaa/go/pkg
+#/Users/aaa/go/src
+
+# git clone the fargate cli into the $GOPATH/src folder
+cd /Users/aaa/go/src
+git clone https://github.com/jpignata/fargate.git
+
+cd /Users/aaa/go/src/fargate
+rm Gopkg.lock
+dep ensure -v
+make build
+
+#Once the make build process finish, you can copy the build bin file --> fargate to $GOROOT/bin
+
+cp bin/fargate /Users/aaa/go/bin/
+```
+
+11. Create ECS Service in Fargate Mode
+
+```
+fargate service create <service name> [--cpu <cpu units>] [--memory <MiB>] [--port <port-expression>]
+                                      [--lb <load-balancer-name>] [--rule <rule-expression>]
+                                      [--image <docker-image>] [--env <key=value>] [--num <count>]
+                                      [--task-role <task-role>] [--subnet-id <subnet-id>]
+                                      [--security-group-id <security-group-id>]
+```
+More detail instructions are available at: 
+
+https://github.com/jpignata/fargate
