@@ -121,3 +121,11 @@ fargate service create <service name> [--cpu <cpu units>] [--memory <MiB>] [--po
 More detail instructions are available at: 
 
 https://github.com/jpignata/fargate
+
+There several ways to run ecs services in fargate mode, if you would like to have the ability to do Blue/Green deployment strategy, that would be great to run ecs service behind the ALB(Application Load Balancer). Not only for the intent, imagine that you you have a lot of microservices and need to well-manage for service discovery, it's also the key to run behind the ALB. 
+
+
+#TODO
+
+* Add ECS Service Discovery integration with Route53
+* Add the Blue/Green Deployment instruction with CodePipeline
