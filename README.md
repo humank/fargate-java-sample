@@ -1,4 +1,5 @@
 # fargate-java-sample
+
 By Using AWS Fargate, ECS, and ECR to demonstrate how to leverage Serveless containers to run Java Spring application.
 
 
@@ -169,7 +170,7 @@ fargate service create spring-petclinic \
 Considering ELB health check mechanism, if the application starting time period is higher than the ELB health check retry timeout...
 Then you will find that all the ECS Service/Tasks are always unhealthy and draining.
 
- 
+![image of grace period](assets/service-health-check-grace-period.png)
     
 
 #TODO
