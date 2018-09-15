@@ -124,8 +124,57 @@ https://github.com/jpignata/fargate
 
 There several ways to run ecs services in fargate mode, if you would like to have the ability to do Blue/Green deployment strategy, that would be great to run ecs service behind the ALB(Application Load Balancer). Not only for the intent, imagine that you you have a lot of microservices and need to well-manage for service discovery, it's also the key to run behind the ALB. 
 
+12. Create ALB from fargate cli
+```
+fargate lb create <load-balancer-name> --port <port-expression> [--certificate <certificate-name>]
+                                       [--subnet-id <subnet-id>] [--security-group-id <security-group-id>]
+```
+
+For the LoadBalancer limitation, you need to specify at least 2 subnets to provision the ALB
+```
+
+#for example ~ 
+fargate lb create kim-alb --port HTTP:80 \
+    --subnet-id subnet-074e51c30471cab75 \
+    --subnet-id subnet-085bf83625bd113cc \
+    --subnet-id subnet-0bbdba02d35e95a4b \
+    --security-group-id sg-0702741778429f7f3 \
+    --region ap-northeast-1 
+```
+
+13. Create ECS Service with ALB
+
+```
+fargate service create <service name> [--cpu <cpu units>] [--memory <MiB>] [--port <port-expression>]
+                                      [--lb <load-balancer-name>] [--rule <rule-expression>]
+                                      [--image <docker-image>] [--env <key=value>] [--num <count>]
+                                      [--task-role <task-role>] [--subnet-id <subnet-id>]
+                                      [--security-group-id <security-group-id>]
+                                      
+
+#for example ~ 
+fargate service create spring-petclinic \
+    --region ap-northeast-1 --verbose \
+    --port HTTP:8080 --lb kim-alb --num 3 \
+    --image 584518143473.dkr.ecr.ap-northeast-1.amazonaws.com/fargate/spring-petclinic \
+    --subnet-id subnet-074e51c30471cab75 \
+    --subnet-id subnet-085bf83625bd113cc \
+    --subnet-id subnet-0bbdba02d35e95a4b \
+    --security-group-id sg-0702741778429f7f3
+                                      
+```
+
+#Java Spring framework Application Lifecycle in ECS-Fargate
+
+Considering ELB health check mechanism, if the application starting time period is higher than the ELB health check retry timeout...
+Then you will find that all the ECS Service/Tasks are always unhealthy and draining.
+
+ 
+    
 
 #TODO
 
+* Add the one-click cloudformation execution to create vpc (optional usage if you don't have)
+* Add the architecture diagram to illustrate ecs/fargate java application serve behind ALB
 * Add ECS Service Discovery integration with Route53
 * Add the Blue/Green Deployment instruction with CodePipeline
