@@ -165,7 +165,7 @@ fargate service create spring-petclinic \
                                       
 ```
 
-#Java Spring framework Application Lifecycle in ECS-Fargate
+# Java Spring framework Application Lifecycle in ECS-Fargate
 
 Considering ELB health check mechanism, if the application starting time period is higher than the ELB health check retry timeout...
 Then you will find that all the ECS Service/Tasks are always unhealthy and draining.
@@ -173,7 +173,7 @@ Then you will find that all the ECS Service/Tasks are always unhealthy and drain
 ![image of grace period](assets/service-health-check-grace-period.png)
     
 
-#TODO
+# TODO
 
 * Add the one-click cloudformation execution to create vpc (optional usage if you don't have)
 * Add the architecture diagram to illustrate ecs/fargate java application serve behind ALB
