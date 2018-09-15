@@ -21,7 +21,7 @@ By Using AWS Fargate, ECS, and ECR to demonstrate how to leverage Serveless cont
             </plugin>
 ```
 3. Install amazon-ecr-credential-helper - https://github.com/awslabs/amazon-ecr-credential-helper
-4. Put the docker-credential-ecr-login in in your path
+4. put the docker-credential-ecr-login into $PATH
 5. Create a docker repository on AWS ECR
 ```
 aws ecr create-repository --repository-name fargate/spring-petclinic
