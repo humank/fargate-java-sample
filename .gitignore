@@ -69,3 +69,8 @@ fabric.properties
 .idea/httpRequests
 
 .DS_Store
+
+# eclipse
+.classpath
+.project
+.settings/
