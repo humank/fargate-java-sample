@@ -1,0 +1,20 @@
+{
+    "cluster": "fargate",
+    "serviceName": "ecs-service-discovery",
+    "taskDefinition": "service_spring-petclinic",
+    "serviceRegistries": [
+       {
+          "registryArn": "arn:aws:servicediscovery:ap-northeast-1:584518143473:service/srv-ulqpebqbp6fsgopn"
+       }
+    ],
+    "launchType": "FARGATE",
+    "platformVersion": "1.2.0",
+    "networkConfiguration": {
+       "awsvpcConfiguration": {
+          "assignPublicIp": "ENABLED",
+          "securityGroups": [ "sg-0702741778429f7f3" ],
+          "subnets": [ "subnet-074e51c30471cab75","subnet-085bf83625bd113cc","subnet-0bbdba02d35e95a4b" ]
+       }
+    },
+    "desiredCount": 1
+}

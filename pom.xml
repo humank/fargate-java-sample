@@ -220,7 +220,7 @@
                         <image>openjdk:8-jre-alpine</image>
                     </from>
                     <to>
-                        <image>584518143473.dkr.ecr.ap-northeast-1.amazonaws.com/fargate/spring-petclinic:${maven.build.timestamp}</image>
+                        <image>aws-account-id.dkr.ecr.ap-northeast-1.amazonaws.com/fargate/spring-petclinic:${maven.build.timestamp}</image>
                         <credHelper>ecr-login</credHelper>
                     </to>
                 </configuration>
