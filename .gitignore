@@ -74,3 +74,4 @@ fabric.properties
 .classpath
 .project
 .settings/
+bin/
