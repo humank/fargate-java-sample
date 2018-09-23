@@ -6,8 +6,10 @@ By Using AWS Fargate, ECS, and ECR to demonstrate how to leverage Serveless cont
 ## Insturction Steps
 
 1. Make sure that Docker is installed on your laptop or environment which you like.
+
 2. Integrate GoogleContainerTools/jib into your maven project
-```
+
+```xml
 <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
@@ -20,7 +22,8 @@ By Using AWS Fargate, ECS, and ECR to demonstrate how to leverage Serveless cont
                 </configuration>
             </plugin>
 ```
-3. Install amazon-ecr-credential-helper - https://github.com/awslabs/amazon-ecr-credential-helper
+
+3. Install amazon-ecr-credential-helper - <https://github.com/awslabs/amazon-ecr-credential-helper>
 4. put the docker-credential-ecr-login into $PATH
 5. Create a docker repository on AWS ECR
 ```
@@ -82,6 +85,7 @@ Check for the running result:
 [INFO] ------------------------------------------------------------------------
 
 ```
+
 9. Install AWS Fargate CLI to simplify the instruction - http://somanymachines.com/fargate/
 You can choose download the binary directly, or manual build it ony your laptop leverage the source : https://github.com/jpignata/fargate
 
@@ -506,18 +510,19 @@ output.
 }
 ```
 
-update ecs services to 0 
+update ecs services to 0
 
-```
+```bash
 aws ecs update-service --cluster fargate --service ecs-service-discovery --desired-count 0 --force-new-deployment --region ap-northeast-1
 ```
+
 delete the service
-```
+
+```bash
 aws ecs delete-service --cluster fargate --service ecs-service-discovery --region ap-northeast-1
 ```
 
-
-# TODO
+## TODO
 
 * Add the one-click cloudformation execution to create vpc (optional usage if you don't have)
 * Add the architecture diagram to illustrate ecs/fargate java application serve behind ALB
