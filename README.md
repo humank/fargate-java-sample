@@ -2,15 +2,14 @@
 
 By Using AWS Fargate, ECS, and ECR to demonstrate how to leverage Serveless containers to run Java Spring application.
 
-
 ## Insturction Steps
 
 1. Make sure that Docker is installed on your laptop or environment which you like.
 
 2. Integrate GoogleContainerTools/jib into your maven project
 
-```xml
-<plugin>
+   ```xml
+    <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>0.9.10</version>
@@ -21,18 +20,26 @@ By Using AWS Fargate, ECS, and ECR to demonstrate how to leverage Serveless cont
                     </to>
                 </configuration>
             </plugin>
-```
+   ```
 
-3. Install amazon-ecr-credential-helper - <https://github.com/awslabs/amazon-ecr-credential-helper>
+3. Install amazon-ecr-credential-helper
+
+   <https://github.com/awslabs/amazon-ecr-credential-helper>
+
 4. put the docker-credential-ecr-login into $PATH
+
 5. Create a docker repository on AWS ECR
-```
-aws ecr create-repository --repository-name fargate/spring-petclinic
-```
+
+   ``` bash
+   aws ecr create-repository --repository-name fargate/spring-petclinic
+   ```
+
 6. build and test locally without any error
-```
-mvn clean test build
-```
+
+   ``` bash
+   mvn clean test build
+   ```
+
 7. build and push a docker image to ECR
 ```
 mvn compile jib:build
