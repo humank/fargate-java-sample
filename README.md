@@ -450,6 +450,73 @@ You can also query the DNS using dig from an instance within your VPC with the f
 dig +short petclinic.petclinic.
 ```
 
+# ECS De-registration from Route53 Service Discovery Service
+if you want to remove the registration, justy follow the commands, please beware that the service discovery service is only allowed by the command line access, you can not modify the detail settings via console.
+Once you try to do with console, you will get an alert that you don't have the permission to modify but allowed by servicediscoveryxxxxxx message.
+
+##Clean up
+
+1. deregister
+```
+aws servicediscovery deregister-instance --service-id srv-ulqpebqbp6fsgopn --instance-id 9d8db77a-919a-4644-80f0-bda078670e62 --region ap-northeast-1
+```
+output.
+```
+{
+    "OperationId": "eo5m3chy4akdzx5jpkqfijoy5jrix2ah-jmea794z"
+}
+```
+
+2. check for the drregister operation
+```
+aws servicediscovery get-operation --operation-id eo5m3chy4akdzx5jpkqfijoy5jrix2ah-jmea794z --region ap-northeast-1
+```
+output.
+```
+{
+    "Operation": {
+        "Id": "eo5m3chy4akdzx5jpkqfijoy5jrix2ah-jmea794z",
+        "Type": "DEREGISTER_INSTANCE",
+        "Status": "SUCCESS",
+        "CreateDate": 1537671990.275,
+        "UpdateDate": 1537671993.905,
+        "Targets": {
+            "INSTANCE": "9d8db77a-919a-4644-80f0-bda078670e62",
+            "ROUTE_53_CHANGE_ID": "C149UB850NBAKP",
+            "SERVICE": "srv-ulqpebqbp6fsgopn"
+        }
+    }
+}
+```
+
+3. delete service discovery service
+```
+aws servicediscovery delete-service --id srv-ulqpebqbp6fsgopn --region ap-northeast-1
+```
+
+4. delete service discovery namespace
+```
+aws servicediscovery delete-namespace --id ns-fvs7tewkdvv5smry --region ap-northeast-1
+```
+output.
+
+```
+{
+    "OperationId": "qo3huizt6dw7mhi542dok2uyegkzfj6a-jmeacu8d"
+}
+```
+
+update ecs services to 0 
+
+```
+aws ecs update-service --cluster fargate --service ecs-service-discovery --desired-count 0 --force-new-deployment --region ap-northeast-1
+```
+delete the service
+```
+aws ecs delete-service --cluster fargate --service ecs-service-discovery --region ap-northeast-1
+```
+
+
 # TODO
 
 * Add the one-click cloudformation execution to create vpc (optional usage if you don't have)
